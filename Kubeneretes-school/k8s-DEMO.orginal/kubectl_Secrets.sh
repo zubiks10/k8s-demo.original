@@ -1,0 +1,1 @@
+kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username='zubiks' --docker-password='7rustGod!' --docker-email='zzubiks@gmail.com'

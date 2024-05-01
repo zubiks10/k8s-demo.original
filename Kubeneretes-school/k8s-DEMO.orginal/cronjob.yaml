@@ -1,0 +1,27 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: my-cronjob
+spec:
+  schedule: "*/5 * * * *"  # Set the cron schedule (every 5 minutes in this example)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: my-container
+            image: sonarqube:latest # Replace with your container image
+
+
+            # Add other container specifications as needed
+  # Add other CronJob specifications as needed
+
+  ## Check the status of your CronJob using the following command:
+  # kubectl get cronjob my-cronjob
+  ## You can also check the created Jobs and Pods
+  ##   kubectl get jobs
+  ##   kubectl get pods
+
+  # To view the logs of the CronJob, you can use the following command:
+
+  #  kubectl logs -l job-name=my-cronjob-xxxxxx-xxxx <Replace my-cronjob-xxxxxx-xxxx with the actual name of the job instance.>
