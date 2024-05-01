@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: devtest-job
+spec:
+  template:
+    metadata:
+      name: devtest-pod
+    spec:
+      containers:
+      - name: example-container
+        image: nginx:latest
+        command: ["echo", "Hello, Kubernetes!"]
+      restartPolicy: Never

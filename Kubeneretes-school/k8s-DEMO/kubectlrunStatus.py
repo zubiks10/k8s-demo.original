@@ -93,6 +93,14 @@ def get_jobs_status():
     print("Jobs Status:")
     print(run_kubectl_command("get jobs --all-namespaces"))
 
+def get_replication_controllers_status():
+    print("Replication Controllers Status:")
+    print(run_kubectl_command("get rc --all-namespaces"))
+
+def get_network_policies():
+    print("Network Policies:")
+    print(run_kubectl_command("get networkpolicies --all-namespaces"))
+
 def main():
     get_cluster_info()
     get_nodes_status()
@@ -115,6 +123,8 @@ def main():
     get_stateful_sets_status()
     get_daemon_sets_status()
     get_jobs_status()
+    get_replication_controllers_status()
+    get_network_policies()
 
 if __name__ == "__main__":
     main()
