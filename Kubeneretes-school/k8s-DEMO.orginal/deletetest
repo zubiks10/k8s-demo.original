@@ -1,4 +1,0 @@
-kubectl delete pod my-pod
-kubectl delete rolebinding my-role-binding
-kubectl delete role my-role
-kubectl delete serviceaccount my-service-account
