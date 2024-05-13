@@ -101,6 +101,15 @@ def get_network_policies():
     print("Network Policies:")
     print(run_kubectl_command("get networkpolicies --all-namespaces"))
 
+def get_all_service_cluster_ips():
+    return run_kubectl_command("get svc --output=jsonpath='{.items[*].spec.clusterIP}'")
+
+def main():
+    all_service_cluster_ips = get_all_service_cluster_ips()
+    if all_service_cluster_ips:
+        print("Cluster IPs of all services:")
+        print(all_service_cluster_ips)
+
 def main():
     get_cluster_info()
     get_nodes_status()
@@ -125,6 +134,7 @@ def main():
     get_jobs_status()
     get_replication_controllers_status()
     get_network_policies()
+    get_all_service_cluster_ips()
 
 if __name__ == "__main__":
     main()
