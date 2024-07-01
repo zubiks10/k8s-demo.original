@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ansible
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ansible
+  template:
+    metadata:
+      labels:
+        app: ansible
+    spec:
+      serviceAccountName: ansible-sa
+      containers:
+      - name: ansible
+        image: zubiks/ansible-k8s:latest
+        volumeMounts:
+        - mountPath: "/root/.kube"
+          name: kubeconfig
+      volumes:
+      - name: kubeconfig
+        configMap:
+          name: kubeconfig
