@@ -62,7 +62,7 @@ minikube dashboard &
 minikube addons enable metrics-server
 
 # Start Minikube with RBAC enabled using extra configuration
-minikube start --extra-config=apiserver.authorization-mode=RBAC
+# minikube start --extra-config=apiserver.authorization-mode=RBAC
 
 # Echo completion message with date
 echo "complete"; date

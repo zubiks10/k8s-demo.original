@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jenkins
-  namespace: jenkins
 spec:
   replicas: 1
   selector:
@@ -15,14 +14,11 @@ spec:
     spec:
       containers:
       - name: jenkins
-        image: jenkins/jenkins:lts
+        image: jenkins/jenkins:latest
+        resources:
+          limits:
+            cpu: 1.0m
+            memory: 516Mi
         ports:
         - containerPort: 8080
         - containerPort: 50000
-        volumeMounts:
-        - name: jenkins-volume
-          mountPath: /var/jenkins_home
-      volumes:
-      - name: jenkins-volume
-        persistentVolumeClaim:
-          claimName: jenkins-pvc
