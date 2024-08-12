@@ -39,3 +39,8 @@ spec:
   selector:
     app: jenkins
   type: NodePort
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins
