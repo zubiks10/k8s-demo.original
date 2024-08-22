@@ -12,14 +12,15 @@ spec:
       labels:
         app: ansible
     spec:
-      serviceAccountName: ansible-sa
       containers:
       - name: ansible
-        image: zubiks/ansible-k8s:latest
+        image: ansible/ansible:ubuntu1404
+        ports:
+        - containerPort: 8080
         volumeMounts:
-        - mountPath: "/root/.kube"
-          name: kubeconfig
+        - mountPath: "/ansible"
+          name: ansible-storage
       volumes:
-      - name: kubeconfig
-        configMap:
-          name: kubeconfig
+      - name: ansible-storage
+        persistentVolumeClaim:
+          claimName: ansible-pvc
