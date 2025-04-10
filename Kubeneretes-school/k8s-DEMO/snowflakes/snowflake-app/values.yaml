@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: zubiks/snowflake-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30080
+
+env:
+  SNOWFLAKE_ACCOUNT: your-account
+  SNOWFLAKE_USER: your-user
+  SNOWFLAKE_WAREHOUSE: COMPUTE_WH
+  SNOWFLAKE_DATABASE: MY_DB
+  SNOWFLAKE_SCHEMA: PUBLIC
+
+snowflakeSecret:
+  name: snowflake-secret
+  password: WW91clNub3dmbGFrZVBhc3N3b3Jk # or use a real secret object instead

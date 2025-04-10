@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: snowflake-app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: SNOWFLAKE_ACCOUNT
+              value: "{{ .Values.env.SNOWFLAKE_ACCOUNT }}"
+            - name: SNOWFLAKE_USER
+              value: "{{ .Values.env.SNOWFLAKE_USER }}"
+            - name: SNOWFLAKE_WAREHOUSE
+              value: "{{ .Values.env.SNOWFLAKE_WAREHOUSE }}"
+            - name: SNOWFLAKE_DATABASE
+              value: "{{ .Values.env.SNOWFLAKE_DATABASE }}"
+            - name: SNOWFLAKE_SCHEMA
+              value: "{{ .Values.env.SNOWFLAKE_SCHEMA }}"
+            - name: SNOWFLAKE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.snowflakeSecret.name }}
+                  key: password
